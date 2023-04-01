@@ -91,31 +91,27 @@ function App() {
   };
 
   return (
-    <div
-      className="flex flex-col w-full h-full border-2 p-1 border-[#2f2922]"
-      data-tauri-drag-region
-    >
+    <div className="flex flex-col w-full h-full p-1" data-tauri-drag-region>
       <span
         data-tauri-drag-region
-        className="flex justify-between items-center"
+        className="flex justify-between items-center p-1 pb-2"
       >
         <HiOutlineViewfinderCircle
-          color="#fff"
           title="Drag"
           size={25}
+          className="text-slate-400 cursor-move"
           data-tauri-drag-region
         />
         <HiOutlineBackspace
           title="Reduce"
-          color="#fff"
           size={25}
-          className="active:text-slate-400"
-          onClick={() => appWindow.close()}
+          className="text-slate-400 active:text-slate-400 cursor-pointer hover:text-slate-500"
+          onClick={() => appWindow.hide()}
         />
       </span>
-      <div className="grow rounded font-mono text-[11px] overflow-y-auto overflow-x-hidden">
+      <div className="grow rounded-lg font-mono text-[11px] overflow-y-auto overflow-x-hidden p-1">
         <div className="w-full flex flex-col">
-          <div className="flex flex-col py-1 gap-1 h-full">
+          <div className="flex flex-col py-1 gap-2 h-full">
             {mdList.map((m, i) => (
               <Marked key={i} onClick={() => handleDelete(i)}>
                 {m}
@@ -124,14 +120,16 @@ function App() {
           </div>
         </div>
       </div>
-      <textarea
-        className="bg-slate-800 border border-slate-700 focus:ring-0 focus:border-slate-700 p-1 resize-none text-[11px] leading-3 text-white w-full min-h-[35px]"
-        onKeyDown={handleTextArea}
-        value={mdInput}
-        onChange={setTextAreaValue}
-      >
-        {" "}
-      </textarea>
+      <div className="px-1">
+        <textarea
+          className="form-textarea bg-slate-800/50 border border-slate-700 focus:ring-0 focus:border-slate-700 p-1 py-[5px] resize-none text-[11px] leading-3 text-white w-full min-h-[50px] max-h-[70px] h-[50px] rounded mt-2 placeholder:text-slate-600"
+          placeholder="Type here..."
+          spellCheck={false}
+          onKeyDown={handleTextArea}
+          value={mdInput}
+          onChange={setTextAreaValue}
+        ></textarea>
+      </div>
     </div>
   );
 }

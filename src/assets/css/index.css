@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #152223;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #252525;
+    padding: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    margin: 2px;
+    background: #434343;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url('../font/Montserrat-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: "Ubuntu";
+    src: url('../font/Ubuntu-Regular.ttf');
+}
+@font-face {
+    font-family: "PT Mono";
+    src: url('../font/PTMono-Regular.ttf');
+}
+@font-face {
+    font-family: "Space Mono";
+    src: url('../font/SpaceMono-Regular.ttf');
+}
+
+* {
+    font-family: 'Ubuntu';
+}
+textarea {
+    font-family: 'PT Mono';
+
+}
+
+* code {
+    background-color: #152223;
+    border: 1px solid #646464;
+    color: white;
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+pre,code,
+pre code {
+    font-family: "PT Mono";
+}
+
+pre {
+    font-family: "PT Mono";
+    overflow: auto;
+    border-radius: 4px;
+    margin: 5px 0px;
+}
+
+pre code {
+    border: 1px solid #293738;
+    padding: 5px 10px !important;
+}
+
+hr {
+    border-top: 1px solid #b7b7b7;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+img {
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #82828283;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+table, th, td {
+    border: 1px solid rgb(153, 153, 153);
+    padding: 2px 5px;
+}
+
+th {
+    background-color: #2f2f2f;
+}
+
+blockquote {
+    border-left: 2px solid #ee8c14;
+    background-color: #f9f9f9;
+    padding: 1px 5px;
+    border-radius: 0px 2px 2px 0px;
+    border-top: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    color: #152223;
+}
+
+.md input {
+    padding: 1px 5px;
+    border-radius: 2px;
+    border: 1px solid #ebe7e7;
+    display: block;
+    width: 100%;
+}
+
+table {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #5a5ce4;
+    /* font-style: italic; */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+li > ul {
+    list-style-type: circle;
+}
+
+li > ul > li > ul {
+    list-style-type: square;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-left: 15px;
+}
+li>ol {
+    list-style-type: circle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    color: #df5211;
+    margin: 5px 0px;
+}
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+    content: '#';
+    margin-right: 5px;
+    color:#f3c11e;
+}
+
+h1 {
+    font-size: 1.4rem;
+}
+h2 {
+    font-size: 1.3rem;
+}
+h3 {
+    font-size: 1.2rem;
+}
+h4 {
+    font-size: 1.1rem;
+}
+h5 {
+    font-size: 1rem;
+}
+h6 {
+    font-size: .9rem;
+}

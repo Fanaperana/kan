@@ -3,7 +3,6 @@ import { FC, useEffect, useMemo } from "react";
 import MarkdownIt from "markdown-it";
 import "highlight.js/styles/atom-one-dark.css";
 import hljs from "highlight.js";
-import StateBlock from "markdown-it/lib/rules_block/state_block";
 
 interface Props {
   children?: string;
@@ -33,7 +32,7 @@ export const Marked: FC<Props> = ({ children = "", onClick }) => {
   return (
     <div
       onDoubleClick={onClick}
-      className="md text-slate-300 bg-[#293035] transition-all duration-200 rounded-sm p-3 border border-slate-800"
+      className="md text-slate-300 bg-[#202b2ebe] transition-all duration-200 rounded-md p-3 border border-slate-800 shadow-xl shadow-[#0b0a0a5c]"
       dangerouslySetInnerHTML={{
         __html: md.render(children),
       }}
