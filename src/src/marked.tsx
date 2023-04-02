@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from "react";
+import { FC, MouseEvent, useEffect, useMemo } from "react";
 // import { marked, Renderer } from "marked";
 import MarkdownIt from "markdown-it";
 import "highlight.js/styles/atom-one-dark.css";
@@ -6,7 +6,8 @@ import hljs from "highlight.js";
 
 interface Props {
   children?: string;
-  onClick?: () => void;
+  onClick?: (_event?: MouseEvent<HTMLDivElement>) => void;
+  onDoubleClick?: () => void;
 }
 
 const md = new MarkdownIt({
@@ -25,13 +26,18 @@ const md = new MarkdownIt({
   },
 });
 
-export const Marked: FC<Props> = ({ children = "", onClick }) => {
+export const Marked: FC<Props> = ({
+  children = "",
+  onClick,
+  onDoubleClick,
+}) => {
   useEffect(() => {
     hljs.highlightAll();
   });
   return (
     <div
-      onDoubleClick={onClick}
+      onDoubleClick={onDoubleClick}
+      onClick={onClick}
       className="md text-slate-300 bg-[#202b2ebe] transition-all duration-200 rounded-md p-3 border border-slate-800 shadow-xl shadow-[#0b0a0a5c]"
       dangerouslySetInnerHTML={{
         __html: md.render(children),

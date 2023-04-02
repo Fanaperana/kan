@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useState, useEffect } from "react";
+import { ChangeEvent, KeyboardEvent, useState, useEffect, useRef } from "react";
 import { HiOutlineViewfinderCircle, HiOutlineBackspace } from "react-icons/hi2";
 import {
   register,
@@ -13,77 +13,79 @@ function App() {
     const storedValue = localStorage.getItem("mdList");
     return storedValue ? JSON.parse(storedValue) : [];
   });
+  const areaInput = useRef<HTMLTextAreaElement>(null);
   const [deletedItems, setDeletedItems] = useState<
     { index: number; value: string }[]
   >([]);
 
-  const [mdInput, setMdInput] = useState("");
-
   useEffect(() => {
     // store mdList value to localStorage whenever it changes
     localStorage.setItem("mdList", JSON.stringify(mdList));
-    const init = async () => {
-      await unregisterAll();
-      await handleKeyBoardEvent();
-    };
-    init();
   }, [mdList]);
 
-  const handleKeyBoardEvent = async () => {
-    await unregister("Ctrl+u");
-    await register("Ctrl+u", () => {
-      console.log("Shortcut triggered");
-      if (deletedItems.length > 0) {
-        const { index, value } = deletedItems[deletedItems.length - 1];
-        setMdList((oldValue) => [
-          ...oldValue.slice(0, index),
-          value,
-          ...oldValue.slice(index),
-        ]);
-        setDeletedItems((oldValue) => oldValue.slice(0, -1));
-      }
-    });
-  };
-
   const handleTextArea = async (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    // await handleKeyBoardEvent();
-    if (event.key === "Tab") {
-      event.preventDefault();
-      setMdInput(mdInput + "  ");
-    } else if (event.key === "h" && event.ctrlKey) {
-      event.preventDefault();
-      setMdInput(mdInput + "## ");
-    } else if (event.key === "i" && event.ctrlKey) {
-      event.preventDefault();
-      const start = event.currentTarget.selectionStart || 0;
-      const end = event.currentTarget.selectionEnd || 0;
-      const selectText = mdInput.slice(start, end);
-      const newValue =
-        mdInput.slice(0, start) + `*${selectText}*` + mdInput.slice(end);
-      setMdInput(newValue);
-      event.currentTarget.setSelectionRange(start + 1, end + 1);
-    } else if (event.key === "b" && !event.shiftKey) {
-      event.preventDefault();
-      const start = event.currentTarget.selectionStart || 0;
-      const end = event.currentTarget.selectionEnd || 0;
-      const selectText = mdInput.slice(start, end);
-      const newValue =
-        mdInput.slice(0, start) + `**${selectText}**` + mdInput.slice(end);
-      setMdInput(newValue);
-      event.currentTarget.setSelectionRange(start + 2, end + 2);
-    } else if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      const value = event.currentTarget.value.trim();
-      if (value) {
-        setMdList((oldValue) => [...oldValue, value]);
-        event.currentTarget.value = "";
-        setMdInput("");
+    const input = areaInput.current;
+    if (input) {
+      /**
+       *
+       * @param t : target
+       * @param d : delimiter
+       * @returns [new_value, start, end, delimiter_length]
+       */
+      const setSurround = (
+        t: KeyboardEvent<HTMLTextAreaElement>,
+        d: string
+      ): [string, number, number, number] => {
+        const data = input.value;
+        const s = input.selectionStart || 0;
+        const e = input.selectionEnd || 0;
+
+        const sText = data.slice(s, e);
+        const newVal = data.slice(0, s) + `${d}${sText}${d}` + data.slice(e);
+        return [newVal, s, e, d.length];
+      };
+
+      if (event.key === "Tab") {
+        event.preventDefault();
+        input.value += "  ";
+      } else if (event.key === "h" && event.ctrlKey) {
+        event.preventDefault();
+        input.value += "## ";
+      } else if (event.key === "i" && event.ctrlKey) {
+        event.preventDefault();
+        const [s, start, end, len] = setSurround(event, "*");
+
+        const input = areaInput.current;
+        if (input) {
+          input.value = s;
+          input.setSelectionRange(start + len, end + len);
+        }
+      } else if (event.key === "b" && !event.shiftKey) {
+        event.preventDefault();
+        const [s, start, end, len] = setSurround(event, "**");
+        const input = areaInput.current;
+        if (input) {
+          input.value = s;
+          input.setSelectionRange(start + len, end + len);
+        }
+      } else if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (value) {
+          setMdList((oldValue) => [...oldValue, value]);
+          input.value = "";
+        }
+      } else if (event.key === "`" && event.ctrlKey) {
+        event.preventDefault();
+        const [s, start, end, len] = setSurround(event, "`");
+
+        const input = areaInput.current;
+        if (input) {
+          input.value = s;
+          input.setSelectionRange(start + len, end + len);
+        }
       }
     }
-  };
-
-  const setTextAreaValue = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setMdInput(event.currentTarget.value);
   };
 
   const handleDelete = (index: number) => {
@@ -113,7 +115,15 @@ function App() {
         <div className="w-full flex flex-col">
           <div className="flex flex-col py-1 gap-2 h-full">
             {mdList.map((m, i) => (
-              <Marked key={i} onClick={() => handleDelete(i)}>
+              <Marked
+                key={i}
+                onClick={(_event) => {
+                  if (_event?.ctrlKey) {
+                    handleDelete(i);
+                  }
+                }}
+                onDoubleClick={() => handleDelete(i)}
+              >
                 {m}
               </Marked>
             ))}
@@ -122,12 +132,11 @@ function App() {
       </div>
       <div className="px-1">
         <textarea
+          ref={areaInput}
           className="form-textarea bg-slate-800/50 border border-slate-700 focus:ring-0 focus:border-slate-700 p-1 py-[5px] resize-none text-[11px] leading-3 text-white w-full min-h-[50px] max-h-[70px] h-[50px] rounded mt-2 placeholder:text-slate-600"
           placeholder="Type here..."
           spellCheck={false}
           onKeyDown={handleTextArea}
-          value={mdInput}
-          onChange={setTextAreaValue}
         ></textarea>
       </div>
     </div>
