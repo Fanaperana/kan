@@ -1,5 +1,7 @@
 # Kan Markdown Note
 
+![](./img/screenshot.png)
+
 Kan is a Markdown Note built with Rust and React. It is a simple and lightweight application that allows you to write and save your not in markdown format. The application is built using the Tauri framework, which makes it cross-platform.
 
 ## Features
