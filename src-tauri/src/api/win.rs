@@ -28,7 +28,7 @@ async fn create_help_win<R: Runtime>(_app: AppHandle<R>, win: Window<R>) {
             .inner_size(400.0, 600.0)
             .max_inner_size(400.0, 600.0)
             .resizable(true)
-            .title("kan")
+            .title("Kan Help")
             .decorations(false)
             .visible(true)
             .always_on_top(true)
@@ -48,7 +48,6 @@ fn window_style<R: Runtime>(_win: &Window<R>) {
     _win.set_focus().unwrap();
     _win.set_fullscreen(false).unwrap();
     _win.set_resizable(false).unwrap();
-    _win.set_title("Kan Help").unwrap();
     _win.set_decorations(false).unwrap();
     _win.set_always_on_top(true).unwrap();
 }
