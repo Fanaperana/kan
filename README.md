@@ -19,7 +19,7 @@ To get started with the Kan markdown editor, follow these steps:
 ### Installation
 1. Clone the repository
 ```shell
-git clone https://github.com/<username>/<repository-name>.git
+git clone https://github.com/Fanaperana/kan.git
 ```
 2. Install the dependencies by navigating into the cloned directory and running:
 ```shell
