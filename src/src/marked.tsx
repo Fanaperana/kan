@@ -38,7 +38,7 @@ export const Marked: FC<Props> = ({
     <div
       onDoubleClick={onDoubleClick}
       onClick={onClick}
-      className="md text-slate-300 bg-[#202b2ebe] transition-all duration-200 rounded-md p-3 border border-slate-800 shadow-xl shadow-[#0b0a0a5c]"
+      className="md text-slate-300 bg-[#202b2ebe] transition-all duration-200 rounded-md p-3 border border-slate-800 shadow-xl shadow-[#0b0a0a5c] select-text"
       dangerouslySetInnerHTML={{
         __html: md.render(children),
       }}

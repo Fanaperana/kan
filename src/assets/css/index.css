@@ -131,10 +131,15 @@ blockquote {
     display: block;
     width: 100%;
 }
+mark {
+    padding: 0px 3px;
+    border-radius: 2px;
+}
 
 table {
     margin-top: 5px;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 a {

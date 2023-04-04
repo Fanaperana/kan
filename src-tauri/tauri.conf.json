@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "kan",
-    "version": "0.0.0"
+    "productName": "Kan",
+    "version": "0.1.0"
   },
   "tauri": {
     "allowlist": {
@@ -27,7 +27,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": ".kan",
       "targets": "all"
     },
     "security": {
@@ -39,6 +39,7 @@
     "windows": [
       {
         "label": "main",
+        "url": "index.html",
         "fullscreen": false,
         "resizable": true,
         "title": "kan",
