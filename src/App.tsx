@@ -61,10 +61,10 @@ function App() {
       if (event.key === "Tab") {
         event.preventDefault();
         input.value += "  ";
-      } else if (event.key === "h" && event.ctrlKey) {
+      } else if (event.code === "KeyH" && event.ctrlKey) {
         event.preventDefault();
         input.value += "## ";
-      } else if (event.key === "i" && event.ctrlKey) {
+      } else if (event.code === "KeyI" && event.ctrlKey) {
         event.preventDefault();
         const [s, start, end, len] = setSurround(event, "*");
 
@@ -73,7 +73,7 @@ function App() {
           input.value = s;
           input.setSelectionRange(start + len, end + len);
         }
-      } else if (event.key === "b" && !event.shiftKey) {
+      } else if (event.code === "KeyB" && event.ctrlKey) {
         event.preventDefault();
         const [s, start, end, len] = setSurround(event, "**");
         const input = areaInput.current;
