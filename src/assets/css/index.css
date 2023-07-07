@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body,
 #root {
@@ -10,8 +9,10 @@ body,
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: #152223;
     overflow: hidden;
+    background-color: transparent;
+    /* background-color: #152223; */
+    /* border-radius: 7px; */
 }
 
 ::-webkit-scrollbar {
@@ -55,7 +56,7 @@ body,
 }
 
 * {
-    font-family: 'Ubuntu';
+    font-family: 'PT Mono';
 }
 textarea {
     font-family: 'PT Mono';
@@ -115,7 +116,7 @@ th {
 
 blockquote {
     border-left: 2px solid #ee8c14;
-    background-color: #f9f9f9;
+    background-color: #ffe8e8;
     padding: 1px 5px;
     border-radius: 0px 2px 2px 0px;
     border-top: 1px solid #e0e0e0;

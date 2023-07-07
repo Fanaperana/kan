@@ -53,7 +53,7 @@ function App() {
   }, []);
   return (
     <div
-      className="flex flex-col w-full h-full text-white border  border-slate-700"
+      className="flex flex-col w-full h-full text-white border  border-slate-700 bg-[#262d2e]"
       data-tauri-drag-region
     >
       <div

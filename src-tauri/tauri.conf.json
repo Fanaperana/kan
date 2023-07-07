@@ -43,15 +43,14 @@
         "fullscreen": false,
         "resizable": true,
         "title": "Kan",
-        "maxWidth": 300,
-        "maxHeight": 2160,
         "minWidth": 200,
         "minHeight": 200,
         "width": 280,
         "height": 400,
         "decorations": false,
         "visible": true,
-        "alwaysOnTop": true
+        "alwaysOnTop": true,
+        "transparent": true
       }
     ]
   }
