@@ -3,6 +3,7 @@ import {
   HiOutlineViewfinderCircle,
   HiOutlineBackspace,
   HiOutlineInformationCircle,
+  HiArrowDownTray,
 } from "react-icons/hi2";
 import { Marked } from "./src";
 import { appWindow, WebviewWindow } from "@tauri-apps/api/window";
@@ -160,8 +161,12 @@ function App() {
     };
   }, [deletedItems]);
 
+  const download = () => {
+    console.log(mdList);
+  };
+
   return (
-    <div className="flex flex-col w-full h-full p-1" data-tauri-drag-region>
+    <div className="flex flex-col w-full h-full p-1 bg-[#22272e] border border-slate-600/70 rounded-md">
       <span
         data-tauri-drag-region
         className="flex justify-between items-center p-1 pb-2"
@@ -172,19 +177,25 @@ function App() {
           className="text-slate-400 cursor-move"
           data-tauri-drag-region
         />
-        <span className="flex gap-2 justify-center items-center">
+        <span className="flex gap-2 justify-center items-center bg-[#2d333b] py-2 px-3 rounded-md border border-slate-700">
+          <HiArrowDownTray
+            title="Export"
+            size={20}
+            className="text-slate-600 active:text-slate-400 cursor-pointer hover:text-slate-500"
+            // onClick={}
+          />
           <HiOutlineInformationCircle
             title="Help"
             size={20}
-            className="text-slate-700 active:text-slate-400 cursor-pointer hover:text-slate-500"
+            className="text-slate-600 active:text-slate-400 cursor-pointer hover:text-slate-500"
             onClick={async () => {
               await invoke("plugin:win|create_help_win");
             }}
           />
           <HiOutlineBackspace
             title="Reduce"
-            size={25}
-            className="text-slate-400 active:text-slate-400 cursor-pointer hover:text-slate-500"
+            size={20}
+            className="text-slate-400 active:text-slate-400 cursor-pointer hover:text-red-600"
             onClick={async () => await appWindow.hide()}
           />
         </span>
@@ -211,7 +222,7 @@ function App() {
       <div className="px-1">
         <textarea
           ref={areaInput}
-          className="form-textarea bg-slate-800/50 border border-slate-700 focus:ring-0 focus:border-slate-700 p-1 py-[5px] resize-none text-[11px] leading-3 text-white w-full min-h-[50px] max-h-[70px] h-[50px] rounded mt-2 placeholder:text-slate-600"
+          className="form-textarea bg-slate-800/50 border border-slate-700 focus:ring-0 focus:border-slate-700 px-2 py-[5px] resize-none text-[11px] leading-3 text-white w-full min-h-[50px] max-h-[70px] h-[50px] rounded mt-2 placeholder:text-slate-600"
           placeholder="Type here..."
           spellCheck={false}
           onKeyDown={handleTextArea}
