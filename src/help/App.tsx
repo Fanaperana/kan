@@ -53,11 +53,11 @@ function App() {
   }, []);
   return (
     <div
-      className="flex flex-col w-full h-full text-white border  border-slate-700 bg-[#262d2e]"
+      className="flex flex-col w-full h-full text-white border  border-slate-700 bg-[#22272e] rounded-md"
       data-tauri-drag-region
     >
       <div
-        className="text-center text-xs relative text-slate-400 font-bold p-1 bg-gray-700/20"
+        className="text-center text-xs relative text-slate-400 font-bold p-1 bg-[#2d333b]"
         data-tauri-drag-region
       >
         <span
