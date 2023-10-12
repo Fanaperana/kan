@@ -31,6 +31,7 @@ async fn create_help_win<R: Runtime>(_app: AppHandle<R>, win: Window<R>) {
             .title("Kan Help")
             .decorations(false)
             .visible(true)
+            .transparent(true)
             .always_on_top(true)
             .build()
             .unwrap();

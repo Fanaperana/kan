@@ -125,13 +125,13 @@ blockquote {
     color: #152223;
 }
 
-.md input {
+/* .md input {
     padding: 1px 5px;
     border-radius: 2px;
     border: 1px solid #ebe7e7;
     display: block;
     width: 100%;
-}
+} */
 mark {
     padding: 0px 3px;
     border-radius: 2px;
